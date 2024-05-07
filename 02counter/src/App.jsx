@@ -11,6 +11,7 @@ function App() {
   const addValue = () => {
     if(counter<=19){
       setCounter(prevCounter => prevCounter + 1)
+      setCounter((prevCounter)=>prevCounter+1) //it will callback
     }
   } 
   

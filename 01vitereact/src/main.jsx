@@ -36,9 +36,16 @@ const reactElement = React.createElement(
 )
 
 ReactDOM.createRoot(document.getElementById('root')).render(
- 
-    reactElement
-  
+    // <>
+    // <MyApp/>
+    // MyApp()
+    // </>
+    // anotherElement
+    // </> this converts html to object
+    
+    // MyApp() if you only run this it will run otherwise it will show text only
+    // reactElement same goes for this
+    
 )
 
 

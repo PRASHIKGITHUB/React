@@ -18,15 +18,17 @@ function App() {
     if (charAllowed) str += "!@#$%^&*-_+=[]{}~`"
 
     for (let i = 1; i <= length; i++) {
-      let char = Math.floor(Math.random() * str.length + 1)
+      let char = Math.floor(Math.random() * str.length )
       pass += str.charAt(char)
       
     }
-
     setPassword(pass)
-
-
   }, [length, numberAllowed, charAllowed, setPassword])
+  // your previous response means that 
+// if passwordGenerator is called somewhere else without changing these states (length, numberAllowed, charAllowed) it wont regenerate password
+// Yes, that's correct. If `passwordGenerator` is called elsewhere in the component or passed as a prop to child components, but the states `length`, `numberAllowed`, and `charAllowed` remain unchanged, the memoized function returned by `useCallback` will not regenerate the password unnecessarily. This is because the function reference remains the same when its dependencies haven't changed.
+
+// So, unless one of the dependencies (`length`, `numberAllowed`, `charAllowed`, `setPassword`) changes, the memoized `passwordGenerator` function will reuse the previously generated password. This behavior helps optimize performance by preventing unnecessary recalculations of the password when the inputs haven't changed.
 
   const copyPasswordToClipboard = useCallback(() => {
     passwordRef.current?.select();
@@ -37,6 +39,9 @@ function App() {
   useEffect(() => {
     passwordGenerator()
   }, [length, numberAllowed, charAllowed, passwordGenerator])
+  // The second argument of useEffect is an array containing dependencies [length, numberAllowed, charAllowed, passwordGenerator]. This array specifies that the effect should re-run if any of these dependencies change.
+
+
   return (
     
     <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-gray-800 text-orange-500">
